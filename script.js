@@ -110,12 +110,21 @@ const runClick = (cellI) => {
     "click",
     () => {
       if (isElem) {
-        cellI.classList.add("X");
-        cellI.setAttribute("data-game", "X");
+        const valid = cellI.getAttribute("data-game");
+        if (valid === "") {
+          cellI.classList.add("X");
+          cellI.setAttribute("data-game", "X");
+        } else return;
         isElem = false;
         X_LEN = 5;
         O_LEN = 5;
       } else {
+
+        const valid = cellI.getAttribute("data-game");
+        if (valid === "") {
+          cellI.classList.add("O");
+          cellI.setAttribute("data-game", "O");
+        } else return;
         isElem = true;
         cellI.classList.remove("X");
         cellI.classList.add("O");
@@ -124,10 +133,8 @@ const runClick = (cellI) => {
         O_LEN = 5;
       }
       checkGame();
-    },
-    // { once: true }
+    }
   );
-  // removeEvent ? cellI.removeEventListener("click") : console.log('k');
 };
 cell.forEach(runClick);
 cell.forEach((index) => boardArray.push(index));
